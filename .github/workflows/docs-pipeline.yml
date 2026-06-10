@@ -15,10 +15,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Build HTML from AsciiDoc
-        uses: asciidoctor/action@master
+      - name: Build HTML from Asciidoc
+        uses: docker://asciidoctor/asciidoctor: latest 
         with:
-          args: asciidoctor--directory=asciidoc-samples --destination-dir=../docs'*.adoc'
+          args: asciidoctor --directory=../docs'*.adoc'
 
       - name: Deploy to GitHub Pages Folder
         run: |
