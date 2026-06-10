@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build HTML from Asciidoc
-        uses: docker://asciidoctor/asciidoctor: latest 
+        uses: docker://asciidoctor/asciidoctor:latest 
         with:
           args: asciidoctor --directory=../docs'*.adoc'
 
