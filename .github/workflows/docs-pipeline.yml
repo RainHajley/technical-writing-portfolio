@@ -1,0 +1,29 @@
+name: Generate and Deploy Documentation Website
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  build-docs:
+      runs-on: ubuntu-latest 
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Build HTML from AsciiDoc
+        uses: asciidoctor/action@master
+        with:
+          args: asciidoctor--directory=asciidoc-samples --destination-dir=../docs'*.adoc'
+
+      - name: Deploy to GitHub Pages Folder
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git add docs/
+          git commit -m "Automated CI/CD: Rendered AsciiDoc to HTML" || exit 0
+          git push
