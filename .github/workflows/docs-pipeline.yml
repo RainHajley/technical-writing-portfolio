@@ -12,16 +12,25 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # Fixed compilation path mapping
+      # 1. Compile AsciiDoc (Your working core preserved)
       - name: Build HTML from AsciiDoc
         run: |
           docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor:latest asciidoctor --destination-dir=docs asciidoc-samples/sensitive-data-sop.adoc
 
-      # Saves the file to your repository
+      # 2. NEW: Compile Markdown Samples to HTML using Pandoc
+      - name: Build HTML from Markdown
+        run: |
+          sudo apt-get update && sudo apt-get install -y pandoc
+          pandoc markdown-samples/markdown-formatting-guide.md -s -o docs/markdown-formatting-guide.html --metadata title="Markdown Formatting Guide"
+          if [ -f markdown-samples/grammarly-guide.md ]; then
+            pandoc markdown-samples/grammarly-guide.md -s -o docs/grammarly-guide.html --metadata title="Grammarly Integration Guide"
+          fi
+
+      # 3. Saves all generated HTML files to your repository
       - name: Deploy to GitHub Pages Folder
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
           git add docs/
-          git commit -m "Automated CI/CD: Rendered AsciiDoc to HTML" || exit 0
+          git commit -m "Automated CI/CD: Rendered AsciiDoc and Markdown to HTML" || exit 0
           git push
