@@ -17,4 +17,5 @@ jobs:
 
       - name: Build HTML from AsciiDoc
         run: |
-          docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor:latest sh -c "asciidoctor --directory=asciidoc-samples --destination-dir=docs asciidoc-samples/sensitive-data-sop.adoc"
+          cd asciidoc-samples
+          docker run --rm -v ${{ github.workspace }}/asciidoc-samples:/documents asciidoctor/docker-asciidoctor:latest asciidoctor --destination-dir=../docs sensitive-data-sop.adoc
