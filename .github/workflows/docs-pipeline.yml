@@ -16,9 +16,5 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build HTML from AsciiDoc
-        uses: docker://asciidoctor/docker-asciidoctor:latest
-        with:
-          args: "asciidoctor --directory=asciidoc-samples --destination-dir=../docs asciidoc-samples/sensitive-data-sop.adoc"
-
-      - name: Complete Build Notification
-        run: echo "Documentation successfully generated and ready for Pages deployment."
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor:latest sh -c "asciidoctor --directory=asciidoc-samples --destination-dir=docs asciidoc-samples/sensitive-data-sop.adoc"
