@@ -10,9 +10,11 @@ This repository is organized into distinct domain folders to demonstrate versati
 
 * **`/api-samples`** (Markdown)
   * **[AI Chat Completions API Reference](./api-samples/llm-generation-api.md)**: A high-level technical reference guide detailing authentication headers, request payloads, model temperature tuning parameters, and JSON token usage objects.
+
 * **`/markdown-samples`** (Markdown)
   * **[How to Use Grammarly in Google Docs](./markdown-samples/grammarly-guide.md)**: An end-user training manual featuring interface navigation, step-by-step onboarding sequences, and visual layout troubleshooting matrixes.
   * **[Markdown Formatting Styling Standards](./markdown-samples/markdown-formatting-guide.md)**: An internal developer guide establishing code block fencing syntax, typographical conventions, and relative linking configurations.
+
 * **`/asciidoc-samples`** (AsciiDoc)
   * **[SOP: Handling Sensitive Client Data](./asciidoc-samples/sensitive-data-sop.adoc)**: A highly structured compliance document showcasing AsciiDoc-specific document attributes, automatic cross-referencing headers, and risk-severity tables.
 
