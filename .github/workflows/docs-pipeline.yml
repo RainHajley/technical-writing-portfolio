@@ -12,35 +12,34 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 1. Compile AsciiDoc (Your working core)
+      # 1. Compile AsciiDoc (Your working core preserved perfectly)
       - name: Build HTML from AsciiDoc
         run: |
           docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor:latest asciidoctor --destination-dir=docs asciidoc-samples/sensitive-data-sop.adoc
 
-      # 2. Compile Markdown Samples to HTML using Pandoc
+      # 2. Compile All Markdown Documents (Including your beautiful API Guide!)
       - name: Build HTML from Markdown
         run: |
           sudo apt-get update && sudo apt-get install -y pandoc
+          
+          # Compiles your Formatting Guide
           pandoc markdown-samples/markdown-formatting-guide.md -s -o docs/markdown-formatting-guide.html --metadata title="Markdown Formatting Guide"
+          
+          # Compiles your Grammarly Guide if it exists
           if [ -f markdown-samples/grammarly-guide.md ]; then
             pandoc markdown-samples/grammarly-guide.md -s -o docs/grammarly-guide.html --metadata title="Grammarly Integration Guide"
           fi
-
-      # 3. NEW: Compile OpenAPI Spec to a Interactive Reference Guide
-      - name: Build Interactive API Reference
-        run: |
-          sudo npm install -g @redocly/cli
-          if [ -f api-samples/*.yaml ]; then
-            redocly build-docs api-samples/*.yaml -o docs/api-reference.html
-          elif [ -f api-samples/*.json ]; then
-            redocly build-docs api-samples/*.json -o docs/api-reference.html
+          
+          # Compiles your exact llm-generation-api.md file
+          if [ -f api-samples/llm-generation-api.md ]; then
+            pandoc api-samples/llm-generation-api.md -s -o docs/api-reference.html --metadata title="Nexus AI Chat Completions API Reference"
           fi
 
-      # 4. Saves all generated HTML files to your repository
+      # 3. Saves everything safely to your live portfolio folder
       - name: Deploy to GitHub Pages Folder
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
           git add docs/
-          git commit -m "Automated CI/CD: Rendered AsciiDoc, Markdown, and API docs to HTML" || exit 0
+          git commit -m "Automated CI/CD: Rendered all pipeline assets to HTML" || exit 0
           git push
