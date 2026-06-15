@@ -12,12 +12,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 1. Compile AsciiDoc (Your working core preserved)
+      # 1. Compile AsciiDoc (Your working core)
       - name: Build HTML from AsciiDoc
         run: |
           docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor:latest asciidoctor --destination-dir=docs asciidoc-samples/sensitive-data-sop.adoc
 
-      # 2. NEW: Compile Markdown Samples to HTML using Pandoc
+      # 2. Compile Markdown Samples to HTML using Pandoc
       - name: Build HTML from Markdown
         run: |
           sudo apt-get update && sudo apt-get install -y pandoc
@@ -26,11 +26,21 @@ jobs:
             pandoc markdown-samples/grammarly-guide.md -s -o docs/grammarly-guide.html --metadata title="Grammarly Integration Guide"
           fi
 
-      # 3. Saves all generated HTML files to your repository
+      # 3. NEW: Compile OpenAPI Spec to a Interactive Reference Guide
+      - name: Build Interactive API Reference
+        run: |
+          sudo npm install -g @redocly/cli
+          if [ -f api-samples/*.yaml ]; then
+            redocly build-docs api-samples/*.yaml -o docs/api-reference.html
+          elif [ -f api-samples/*.json ]; then
+            redocly build-docs api-samples/*.json -o docs/api-reference.html
+          fi
+
+      # 4. Saves all generated HTML files to your repository
       - name: Deploy to GitHub Pages Folder
         run: |
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
           git add docs/
-          git commit -m "Automated CI/CD: Rendered AsciiDoc and Markdown to HTML" || exit 0
+          git commit -m "Automated CI/CD: Rendered AsciiDoc, Markdown, and API docs to HTML" || exit 0
           git push
