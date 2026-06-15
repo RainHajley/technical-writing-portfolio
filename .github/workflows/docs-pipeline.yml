@@ -18,7 +18,7 @@ jobs:
       - name: Build HTML from AsciiDoc
         uses: docker://asciidoctor/docker-asciidoctor:latest
         with:
-          args: sh -c "asciidoctor --directory=asciidoc-samples --destination-dir=../docs asciidoc-samples/*.adoc"
+          args: "asciidoctor --directory=asciidoc-samples --destination-dir=../docs asciidoc-samples/sensitive-data-sop.adoc"
 
       - name: Deploy to GitHub Pages Folder
         run: |
