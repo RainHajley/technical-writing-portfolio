@@ -10,15 +10,15 @@ permissions:
 
 jobs:
   build-docs:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Build HTML from Asciidoc
-        uses: docker://asciidoctor/docker-asciidoctor:latest 
+      - name: Build HTML from AsciiDoc
+        uses: docker://asciidoctor/docker-asciidoctor:latest
         with:
-          args: asciidoctor --directory=../docs'*.adoc'
+          args: sh -c "asciidoctor --directory=asciidoc-samples --destination-dir=../docs asciidoc-samples/*.adoc"
 
       - name: Deploy to GitHub Pages Folder
         run: |
