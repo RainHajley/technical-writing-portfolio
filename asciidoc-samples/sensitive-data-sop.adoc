@@ -1,8 +1,9 @@
-= Standard Operating Procedure: Handling Sensitive Client Data
-:document-id: SOP-OPS-042
-:version: 1.0
-:effective-date: June 8, 2026
+= Standard Operating Procedure: Sanitizing Sensitive Patient Data (HIPAA Compliance)
+:document-id: SOP-HIT-094
+:version: 1.1
+:effective-date: June 20, 2026
 :review-cycle: Annual
+:classification: Restricted - Internal Use Only
 :icons: font
 :numbered:
 
@@ -11,26 +12,29 @@
 *Document ID:* {document-id} +
 *Version:* {version} +
 *Effective Date:* {effective-date} +
-*Review Cycle:* {review-cycle}
+*Review Cycle:* {review-cycle} +
+*Classification:* {classification}
 ****
 
 == Purpose
-This procedure defines the mandatory security steps all remote team members must follow when collecting, storing, and sharing sensitive client information. This ensures compliance with standard privacy laws and protects client confidentiality.
+This Standard Operating Procedure (SOP) defines the mandatory data sanitization workflows required for all remote operations personnel, engineering teams, and technical content contributors. The objective of this document is to guarantee absolute protection of Protected Health Information (PHI) and Personally Identifiable Information (PII), ensuring strict adherence to the Health Insurance Portability and Accountability Act (HIPAA) Privacy and Security Rules.
 
 == Scope
-This policy applies to all full-time, part-time, and contract employees working in a remote environment who access client records, financial data, or personal identification information.
+This procedure applies to all full-time employees, contractors, and third-party vendors accessing corporate repositories, staging environments, development logging streams, or electronic health record (EHR) simulation sandboxes in a distributed, remote workforce environment.
 
-== Mandatory Security Actions
+== Mandatory Sanitization Protocol
 
-=== Data Collection and Storage
-* *Use Approved Repositories Only:* Store all client files inside the secure corporate cloud storage drive. Never download client files directly to your personal computer's local hard drive or desktop.
-* *Apply Access Restrictions:* Set file permissions to *Restricted* immediately upon creating a new folder. Only invite specific team members who directly require access to complete the project.
+=== Storage Segregation and Ingestion Rules
+* *Approved Repositories Only:* All datasets containing patient metrics, medical histories, or administrative logs must reside exclusively within the company's hardware-encrypted, access-controlled cloud directory. 
+* *Local Hard Drive Isolation:* Downloads or staging cache transfers of raw PHI to local, non-corporate endpoints or personal computer hard drives are strictly prohibited. 
+* *Role-Based Access Controls (RBAC):* Permissions for new directories containing patient metadata must be configured as `Restricted` immediately upon instantiation. Explicit folder access invitations must be limited to designated team members matching specific data authorization clearances.
 
-=== Data Transmission and Sharing
-* *Encrypt Shared Links:* When sending a file link via email or team chat, always check the password protection box and set a 7-day link expiration date.
-* *Verify Recipient Identity:* Double-check the email address of the recipient before hitting send. Never share sensitive data links in public or group chat channels.
+=== Data Masking and Encrypted Transmission
+* *Log De-identification:* Before compiling engineering documentation, system runtime snapshots, or software guides, all logs must be scrubbed using approved de-identification scripts to mask patient identifiers, including names, geographic indices, dates, and account numbers.
+* *Link Encryption Framework:* When exchanging secure documentation URLs across internal messaging grids or corporate email systems, users must activate password enforcement protocols and assign a mandatory 7-day link expiration ceiling.
+* *Public Channel Zero-Tolerance:* Sharing raw documentation links or access tokens within unencrypted, public, or cross-departmental group chat spaces is strictly forbidden.
 
-== Compliance Auditing
-The operations team conducts random security audits every month to ensure file permissions are set correctly.
+== Compliance and Continuous Auditing
+The Information Security and Operations auditing units conduct automated, randomized repository validations monthly to enforce permission profiles and evaluate document isolation integrity.
 
-WARNING: Violations of this policy will result in a formal review and temporary suspension of data access privileges.
+WARNING: Non-compliance with this data sanitization policy exposes the organization to severe regulatory liabilities and HIPAA enforcement penalties. Unauthorized disclosure or mishandling of internal patient datasets will trigger an immediate corporate security review and administrative suspension of system infrastructure privileges.
