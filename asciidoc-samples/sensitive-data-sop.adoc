@@ -4,10 +4,9 @@
 :effective-date: June 20, 2026
 :review-cycle: Annual
 :classification: Restricted - Internal Use Only
-:icons: font
-:numbered:
+:toc: macro
 
-[sidebar]
+[.sidebar]
 ****
 *Document ID:* {document-id} +
 *Version:* {version} +
@@ -17,7 +16,9 @@
 ****
 
 == Purpose
-This Standard Operating Procedure (SOP) defines the mandatory data sanitization workflows required for all remote operations personnel, engineering teams, and technical content contributors. The objective of this document is to guarantee absolute protection of Protected Health Information (PHI) and Personally Identifiable Information (PII), ensuring strict adherence to the Health Insurance Portability and Accountability Act (HIPAA) Privacy and Security Rules.
+This Standard Operating Procedure (SOP) defines the mandatory data sanitization workflows required for all remote operations personnel, engineering teams, and technical content contributors. 
+
+The objective of this document is to guarantee absolute protection of Protected Health Information (PHI) and Personally Identifiable Information (PII), ensuring strict adherence to the Health Insurance Portability and Accountability Act (HIPAA) Privacy and Security Rules.
 
 == Scope
 This procedure applies to all full-time employees, contractors, and third-party vendors accessing corporate repositories, staging environments, development logging streams, or electronic health record (EHR) simulation sandboxes in a distributed, remote workforce environment.
@@ -25,9 +26,9 @@ This procedure applies to all full-time employees, contractors, and third-party 
 == Mandatory Sanitization Protocol
 
 === Storage Segregation and Ingestion Rules
-* *Approved Repositories Only:* All datasets containing patient metrics, medical histories, or administrative logs must reside exclusively within the company's hardware-encrypted, access-controlled cloud directory. 
-* *Local Hard Drive Isolation:* Downloads or staging cache transfers of raw PHI to local, non-corporate endpoints or personal computer hard drives are strictly prohibited. 
-* *Role-Based Access Controls (RBAC):* Permissions for new directories containing patient metadata must be configured as `Restricted` immediately upon instantiation. Explicit folder access invitations must be limited to designated team members matching specific data authorization clearances.
+* *Approved Repositories Only:* All datasets containing patient metrics, medical histories, or administrative logs must reside exclusively within the company's hardware-encrypted, access-controlled cloud directory.
+* *Local Hard Drive Isolation:* Downloads or staging cache transfers of raw PHI to local, non-corporate endpoints or personal computer hard drives are strictly prohibited.
+* *Role-Based Access Controls (RBAC):* Permissions for new directories containing patient metadata must be configured as Restricted immediately upon instantiation. Explicit folder access invitations must be limited to designated team members matching specific data authorization clearances.
 
 === Data Masking and Encrypted Transmission
 * *Log De-identification:* Before compiling engineering documentation, system runtime snapshots, or software guides, all logs must be scrubbed using approved de-identification scripts to mask patient identifiers, including names, geographic indices, dates, and account numbers.
@@ -37,4 +38,7 @@ This procedure applies to all full-time employees, contractors, and third-party 
 == Compliance and Continuous Auditing
 The Information Security and Operations auditing units conduct automated, randomized repository validations monthly to enforce permission profiles and evaluate document isolation integrity.
 
-WARNING: Non-compliance with this data sanitization policy exposes the organization to severe regulatory liabilities and HIPAA enforcement penalties. Unauthorized disclosure or mishandling of internal patient datasets will trigger an immediate corporate security review and administrative suspension of system infrastructure privileges.
+[WARNING]
+====
+Non-compliance with this data sanitization policy exposes the organization to severe regulatory liabilities and HIPAA enforcement penalties. Unauthorized disclosure or mishandling of internal patient datasets will trigger an immediate corporate security review and administrative suspension of system infrastructure privileges.
+====
