@@ -2,10 +2,14 @@
 
 This internal reference guide defines the code-formatting rules, typographical standards, and metadata conventions required for all developer-facing documentation.
 
+---
+
 ## Typography and Highlights
 
-* **UI Components**: Use **bolding** for clickable buttons, menus, and user interface elements (e.g., "Click **Submit**").
-* **File Paths and Variables**: Wrap system properties, relative folder structures, and environmental variables in `backticks` (e.g., `src/main/resources/config.json`).
+* **UI Components:** Use bolding for clickable buttons, menus, and user interface elements (e.g., "Click **Submit**").
+* **File Paths and Variables:** Wrap system properties, relative folder structures, and environmental variables in backticks (e.g., `src/main/resources/config.json`).
+
+---
 
 ## Code Block Standards
 
@@ -19,8 +23,10 @@ def calculate_system_uptime(total_seconds, downtime_seconds):
     return ((total_seconds - downtime_seconds) / total_seconds) * 100
 ```
 
+---
+
 ## Review Checklist
 
-1. Verify that all markdown links point to relative directory items rather than absolute localhost URLs.
-2. Confirm all tables contain explicit header rows.
-3. Validate that image assets utilize lightweight compressed media formats (.webp or .png).
+- [ ] Verify that all markdown links point to relative directory items rather than absolute localhost URLs.
+- [ ] Confirm all tables contain explicit header rows.
+- [ ] Validate that image assets utilize lightweight compressed media formats (`.webp` or `.png`).
