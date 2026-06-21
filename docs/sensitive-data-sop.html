@@ -433,7 +433,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body class="article">
 <div id="header">
@@ -442,7 +441,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="sidebarblock">
+<div class="sidebarblock sidebar">
 <div class="content">
 <div class="paragraph">
 <p><strong>Document ID:</strong> SOP-HIT-094<br>
@@ -456,15 +455,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_purpose">1. Purpose</h2>
+<h2 id="_purpose">Purpose</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This Standard Operating Procedure (SOP) defines the mandatory data sanitization workflows required for all remote operations personnel, engineering teams, and technical content contributors. The objective of this document is to guarantee absolute protection of Protected Health Information (PHI) and Personally Identifiable Information (PII), ensuring strict adherence to the Health Insurance Portability and Accountability Act (HIPAA) Privacy and Security Rules.</p>
+<p>This Standard Operating Procedure (SOP) defines the mandatory data sanitization workflows required for all remote operations personnel, engineering teams, and technical content contributors.</p>
+</div>
+<div class="paragraph">
+<p>The objective of this document is to guarantee absolute protection of Protected Health Information (PHI) and Personally Identifiable Information (PII), ensuring strict adherence to the Health Insurance Portability and Accountability Act (HIPAA) Privacy and Security Rules.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_scope">2. Scope</h2>
+<h2 id="_scope">Scope</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>This procedure applies to all full-time employees, contractors, and third-party vendors accessing corporate repositories, staging environments, development logging streams, or electronic health record (EHR) simulation sandboxes in a distributed, remote workforce environment.</p>
@@ -472,10 +474,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_mandatory_sanitization_protocol">3. Mandatory Sanitization Protocol</h2>
+<h2 id="_mandatory_sanitization_protocol">Mandatory Sanitization Protocol</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_storage_segregation_and_ingestion_rules">3.1. Storage Segregation and Ingestion Rules</h3>
+<h3 id="_storage_segregation_and_ingestion_rules">Storage Segregation and Ingestion Rules</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -485,13 +487,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong>Local Hard Drive Isolation:</strong> Downloads or staging cache transfers of raw PHI to local, non-corporate endpoints or personal computer hard drives are strictly prohibited.</p>
 </li>
 <li>
-<p><strong>Role-Based Access Controls (RBAC):</strong> Permissions for new directories containing patient metadata must be configured as <code>Restricted</code> immediately upon instantiation. Explicit folder access invitations must be limited to designated team members matching specific data authorization clearances.</p>
+<p><strong>Role-Based Access Controls (RBAC):</strong> Permissions for new directories containing patient metadata must be configured as Restricted immediately upon instantiation. Explicit folder access invitations must be limited to designated team members matching specific data authorization clearances.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_data_masking_and_encrypted_transmission">3.2. Data Masking and Encrypted Transmission</h3>
+<h3 id="_data_masking_and_encrypted_transmission">Data Masking and Encrypted Transmission</h3>
 <div class="ulist">
 <ul>
 <li>
@@ -509,7 +511,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div class="sect1">
-<h2 id="_compliance_and_continuous_auditing">4. Compliance and Continuous Auditing</h2>
+<h2 id="_compliance_and_continuous_auditing">Compliance and Continuous Auditing</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>The Information Security and Operations auditing units conduct automated, randomized repository validations monthly to enforce permission profiles and evaluate document isolation integrity.</p>
@@ -518,10 +520,12 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<div class="title">Warning</div>
 </td>
 <td class="content">
-Non-compliance with this data sanitization policy exposes the organization to severe regulatory liabilities and HIPAA enforcement penalties. Unauthorized disclosure or mishandling of internal patient datasets will trigger an immediate corporate security review and administrative suspension of system infrastructure privileges.
+<div class="paragraph">
+<p>Non-compliance with this data sanitization policy exposes the organization to severe regulatory liabilities and HIPAA enforcement penalties. Unauthorized disclosure or mishandling of internal patient datasets will trigger an immediate corporate security review and administrative suspension of system infrastructure privileges.</p>
+</div>
 </td>
 </tr>
 </table>
@@ -531,7 +535,7 @@ Non-compliance with this data sanitization policy exposes the organization to se
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-21 23:10:06 UTC
+Last updated 2026-06-21 23:17:08 UTC
 </div>
 </div>
 </body>
