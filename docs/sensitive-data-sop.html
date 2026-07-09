@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Standard Operating Procedure: Sanitizing Sensitive Patient Data (HIPAA Compliance)</title>
+<title>SOP: Patient Data Sanitization</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,85 +436,83 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>Standard Operating Procedure: Sanitizing Sensitive Patient Data (HIPAA Compliance)</h1>
+<h1>SOP: Patient Data Sanitization</h1>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="sidebarblock sidebar">
-<div class="content">
 <div class="paragraph">
-<p><strong>Document ID:</strong> SOP-HIT-094<br>
-<strong>Version:</strong> 1.1<br>
-<strong>Effective Date:</strong> June 20, 2026<br>
-<strong>Review Cycle:</strong> Annual<br>
-<strong>Classification:</strong> Restricted - Internal Use Only</p>
-</div>
-</div>
+<p>Working with Protected Health Information (PHI) requires strict adherence to security protocols. If you handle patient metrics, histories, or logs, follow these standards to maintain compliance.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_purpose">Purpose</h2>
+<h2 id="_storage_rules">Storage Rules</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>This Standard Operating Procedure (SOP) defines the mandatory data sanitization workflows required for all remote operations personnel, engineering teams, and technical content contributors.</p>
-</div>
-<div class="paragraph">
-<p>The objective of this document is to guarantee absolute protection of Protected Health Information (PHI) and Personally Identifiable Information (PII), ensuring strict adherence to the Health Insurance Portability and Accountability Act (HIPAA) Privacy and Security Rules.</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><strong>Centralize data</strong></dt>
+<dd>
+<p>Store all patient-related data exclusively within our company-managed, hardware-encrypted cloud directories.</p>
+</dd>
+<dt class="hdlist1"><strong>No local files</strong></dt>
+<dd>
+<p>Do not download or cache raw PHI on your local machine.</p>
+</dd>
+<dt class="hdlist1"><strong>Restrict access</strong></dt>
+<dd>
+<p>When creating a new directory, set it to <strong>Restricted</strong> immediately. Only grant access to team members who require it for their specific tasks.</p>
+</dd>
+</dl>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_scope">Scope</h2>
+<h2 id="_data_sanitization_sharing">Data Sanitization &amp; Sharing</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This procedure applies to all full-time employees, contractors, and third-party vendors accessing corporate repositories, staging environments, development logging streams, or electronic health record (EHR) simulation sandboxes in a distributed, remote workforce environment.</p>
+<p>Before including logs in documentation or sharing them with the team, you must scrub the data.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_mandatory_sanitization_protocol">Mandatory Sanitization Protocol</h2>
-<div class="sectionbody">
 <div class="sect2">
-<h3 id="_storage_segregation_and_ingestion_rules">Storage Segregation and Ingestion Rules</h3>
+<h3 id="_de_identify">De-identify</h3>
+<div class="paragraph">
+<p>Run our authorized scripts on all logs to mask patient names, locations, dates, and account numbers.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_secure_links">Secure links</h3>
+<div class="paragraph">
+<p>If you share a link to sensitive documentation, you must enforce the following:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Approved Repositories Only:</strong> All datasets containing patient metrics, medical histories, or administrative logs must reside exclusively within the company&#8217;s hardware-encrypted, access-controlled cloud directory.</p>
+<p>Enable <strong>Password Protection</strong>.</p>
 </li>
 <li>
-<p><strong>Local Hard Drive Isolation:</strong> Downloads or staging cache transfers of raw PHI to local, non-corporate endpoints or personal computer hard drives are strictly prohibited.</p>
-</li>
-<li>
-<p><strong>Role-Based Access Controls (RBAC):</strong> Permissions for new directories containing patient metadata must be configured as Restricted immediately upon instantiation. Explicit folder access invitations must be limited to designated team members matching specific data authorization clearances.</p>
+<p>Set the <strong>Link Expiration</strong> to <strong>7 days</strong>.</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_data_masking_and_encrypted_transmission">Data Masking and Encrypted Transmission</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Log De-identification:</strong> Before compiling engineering documentation, system runtime snapshots, or software guides, all logs must be scrubbed using approved de-identification scripts to mask patient identifiers, including names, geographic indices, dates, and account numbers.</p>
-</li>
-<li>
-<p><strong>Link Encryption Framework:</strong> When exchanging secure documentation URLs across internal messaging grids or corporate email systems, users must activate password enforcement protocols and assign a mandatory 7-day link expiration ceiling.</p>
-</li>
-<li>
-<p><strong>Public Channel Zero-Tolerance:</strong> Sharing raw documentation links or access tokens within unencrypted, public, or cross-departmental group chat spaces is strictly forbidden.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_compliance_and_continuous_auditing">Compliance and Continuous Auditing</h2>
-<div class="sectionbody">
+<h3 id="_keep_it_private">Keep it private</h3>
 <div class="paragraph">
-<p>The Information Security and Operations auditing units conduct automated, randomized repository validations monthly to enforce permission profiles and evaluate document isolation integrity.</p>
+<p>Never share access tokens or links to raw data in public or cross-departmental chat channels.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Monthly Audits:</strong> Our security team performs randomized, automated audits on all repositories. Improper permissions or public links will trigger an immediate flag.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -524,7 +522,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </td>
 <td class="content">
 <div class="paragraph">
-<p>Non-compliance with this data sanitization policy exposes the organization to severe regulatory liabilities and HIPAA enforcement penalties. Unauthorized disclosure or mishandling of internal patient datasets will trigger an immediate corporate security review and administrative suspension of system infrastructure privileges.</p>
+<p><strong>Compliance Risk:</strong> Handling patient data is high-stakes. Non-compliance results in an immediate security review and suspension of your system access.</p>
 </div>
 </td>
 </tr>
@@ -533,9 +531,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 </div>
+</div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2026-06-21 23:25:24 UTC
+Last updated 2026-07-09 12:16:25 UTC
 </div>
 </div>
 </body>
