@@ -38,13 +38,12 @@ jobs:
           git config --global user.name "GitHub Actions Bot"
           git config --global user.email "actions@github.com"
           
-          # Stage, stash, pull, and pop to ensure a clean sync with remote
-          git add docs/
-          git stash
-          git pull --rebase origin main
-          git stash pop
+          # Fetch and reset to ensure we are exactly at the remote head
+          git fetch origin main
+          git reset --hard origin/main
           
-          # Commit and push the now-synced changes
+          # Now regenerate/move the files into place
+          # (The previous steps already generated them in /docs, so we just add them)
           git add docs/
           git commit -m "Automated CI/CD: Rendered all pipeline assets to HTML" || exit 0
           git push origin main
