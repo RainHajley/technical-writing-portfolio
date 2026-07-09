@@ -1,32 +1,32 @@
-# Engineering Documentation Markdown Styling Standards
+# Engineering Documentation Standards
 
-This internal reference guide defines the code-formatting rules, typographical standards, and metadata conventions required for all developer-facing documentation.
-
----
+This guide defines the formatting and metadata requirements for all developer-facing documentation.
 
 ## Typography and Highlights
 
-* **UI Components:** Use bolding for clickable buttons, menus, and user interface elements (e.g., "Click **Submit**").
-* **File Paths and Variables:** Wrap system properties, relative folder structures, and environmental variables in backticks (e.g., `src/main/resources/config.json`).
-
----
+* **UI Components**: Use bold for buttons, menus, and interface elements (e.g., **Submit**).
+* **Paths & Variables**: Use backticks for file paths, folder structures, and environmental variables (e.g., `src/config.json`).
+* *Emphasis*: Use italics for key terms or conceptual labels.
 
 ## Code Block Standards
 
-All sample source blocks must specify the exact rendering language in the opening fence to guarantee accurate syntax highlighting.
+Always specify the language in the opening fence to enable correct syntax highlighting.
+
+### Example
 
 ```python
-def calculate_system_uptime(total_seconds, downtime_seconds):
+def calculate_uptime(total, downtime):
     """Computes operational availability percentage."""
-    if total_seconds == 0:
+    if total == 0:
         return 0.0
-    return ((total_seconds - downtime_seconds) / total_seconds) * 100
+    return ((total - downtime) / total) * 100
 ```
-
----
 
 ## Review Checklist
 
-- [ ] Verify that all markdown links point to relative directory items rather than absolute localhost URLs.
-- [ ] Confirm all tables contain explicit header rows.
-- [ ] Validate that image assets utilize lightweight compressed media formats (`.webp` or `.png`).
+Before merging any documentation updates, verify the following:
+
+- [ ] **Links**: All internal links use relative paths rather than absolute URLs.
+- [ ] **Tables**: All tables contain explicit, properly formatted header rows.
+- [ ] **Media**: All image assets use compressed formats (`.webp` or `.png`).
+- [ ] **Clarity**: Ensure the tone is direct—avoid filler words and unnecessary process explanations.
