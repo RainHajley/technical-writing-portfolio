@@ -1,44 +1,38 @@
-= Standard Operating Procedure: Sanitizing Sensitive Patient Data (HIPAA Compliance)
-:document-id: SOP-HIT-094
-:version: 1.1
-:effective-date: June 20, 2026
-:review-cycle: Annual
-:classification: Restricted - Internal Use Only
-:toc: macro
+= SOP: Patient Data Sanitization
+:id: SOP-HIT-094
+:status: Internal
+:compliance: HIPAA
 
-[.sidebar]
-****
-*Document ID:* {document-id} +
-*Version:* {version} +
-*Effective Date:* {effective-date} +
-*Review Cycle:* {review-cycle} +
-*Classification:* {classification}
-****
+Working with Protected Health Information (PHI) requires strict adherence to security protocols. If you handle patient metrics, histories, or logs, follow these standards to maintain compliance.
 
-== Purpose
-This Standard Operating Procedure (SOP) defines the mandatory data sanitization workflows required for all remote operations personnel, engineering teams, and technical content contributors. 
+== Storage Rules
 
-The objective of this document is to guarantee absolute protection of Protected Health Information (PHI) and Personally Identifiable Information (PII), ensuring strict adherence to the Health Insurance Portability and Accountability Act (HIPAA) Privacy and Security Rules.
+*Centralize data*:: Store all patient-related data exclusively within our company-managed, hardware-encrypted cloud directories.
+*No local files*:: Do not download or cache raw PHI on your local machine.
+*Restrict access*:: When creating a new directory, set it to **Restricted** immediately. Only grant access to team members who require it for their specific tasks.
 
-== Scope
-This procedure applies to all full-time employees, contractors, and third-party vendors accessing corporate repositories, staging environments, development logging streams, or electronic health record (EHR) simulation sandboxes in a distributed, remote workforce environment.
+== Data Sanitization & Sharing
 
-== Mandatory Sanitization Protocol
+Before including logs in documentation or sharing them with the team, you must scrub the data.
 
-=== Storage Segregation and Ingestion Rules
-* *Approved Repositories Only:* All datasets containing patient metrics, medical histories, or administrative logs must reside exclusively within the company's hardware-encrypted, access-controlled cloud directory.
-* *Local Hard Drive Isolation:* Downloads or staging cache transfers of raw PHI to local, non-corporate endpoints or personal computer hard drives are strictly prohibited.
-* *Role-Based Access Controls (RBAC):* Permissions for new directories containing patient metadata must be configured as Restricted immediately upon instantiation. Explicit folder access invitations must be limited to designated team members matching specific data authorization clearances.
+=== De-identify
+Run our authorized scripts on all logs to mask patient names, locations, dates, and account numbers.
 
-=== Data Masking and Encrypted Transmission
-* *Log De-identification:* Before compiling engineering documentation, system runtime snapshots, or software guides, all logs must be scrubbed using approved de-identification scripts to mask patient identifiers, including names, geographic indices, dates, and account numbers.
-* *Link Encryption Framework:* When exchanging secure documentation URLs across internal messaging grids or corporate email systems, users must activate password enforcement protocols and assign a mandatory 7-day link expiration ceiling.
-* *Public Channel Zero-Tolerance:* Sharing raw documentation links or access tokens within unencrypted, public, or cross-departmental group chat spaces is strictly forbidden.
+=== Secure links
+If you share a link to sensitive documentation, you must enforce the following:
 
-== Compliance and Continuous Auditing
-The Information Security and Operations auditing units conduct automated, randomized repository validations monthly to enforce permission profiles and evaluate document isolation integrity.
+* Enable **Password Protection**.
+* Set the **Link Expiration** to **7 days**.
+
+=== Keep it private
+Never share access tokens or links to raw data in public or cross-departmental chat channels.
+
+[NOTE]
+====
+*Monthly Audits:* Our security team performs randomized, automated audits on all repositories. Improper permissions or public links will trigger an immediate flag.
+====
 
 [WARNING]
 ====
-Non-compliance with this data sanitization policy exposes the organization to severe regulatory liabilities and HIPAA enforcement penalties. Unauthorized disclosure or mishandling of internal patient datasets will trigger an immediate corporate security review and administrative suspension of system infrastructure privileges.
+*Compliance Risk:* Handling patient data is high-stakes. Non-compliance results in an immediate security review and suspension of your system access.
 ====
