@@ -15,6 +15,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      # 0. Sync and Clean Workspace
+      - name: Sync and Clean Workspace
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+          git fetch origin main
+          git reset --hard origin/main
+
       # 1. Compile AsciiDoc
       - name: Build HTML from AsciiDoc
         run: |
@@ -24,26 +32,29 @@ jobs:
       - name: Build HTML from Markdown
         run: |
           sudo apt-get update && sudo apt-get install -y pandoc
+          # Standard guides
           pandoc markdown-samples/markdown-formatting-guide.md -s -o docs/markdown-formatting-guide.html --metadata title="Markdown Formatting Guide"
-          if [ -f markdown-samples/grammarly-guide.md ]; then
-            pandoc markdown-samples/grammarly-guide.md -s -o docs/grammarly-guide.html --metadata title="Grammarly Integration Guide"
+          
+          # Documentation standards
+          pandoc engineering_docs_standards.md -s -o docs/engineering-standards.html --metadata title="Engineering Documentation Standards"
+          
+          # API Reference (Updated filename reference)
+          if [ -f chat_completions_api.md ]; then
+            pandoc chat_completions_api.md -s -o docs/api-reference.html --metadata title="Nexus AI Chat Completions API Reference"
           fi
-          if [ -f api-samples/llm-generation-api.md ]; then
-            pandoc api-samples/llm-generation-api.md -s -o docs/api-reference.html --metadata title="Nexus AI Chat Completions API Reference"
+          
+          # SOP Reference
+          if [ -f sop_patient_data.md ]; then
+            pandoc sop_patient_data.md -s -o docs/sop-patient-data.html --metadata title="SOP: Patient Data Sanitization"
           fi
 
-      # 3. Saves everything safely to your live portfolio folder
+      # 3. Deploy
       - name: Deploy to GitHub Pages Folder
         run: |
-          git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "actions@github.com"
-          
-          # Fetch and reset to ensure we are exactly at the remote head
-          git fetch origin main
-          git reset --hard origin/main
-          
-          # Now regenerate/move the files into place
-          # (The previous steps already generated them in /docs, so we just add them)
           git add docs/
-          git commit -m "Automated CI/CD: Rendered all pipeline assets to HTML" || exit 0
-          git push origin main
+          if ! git diff --cached --quiet; then
+            git commit -m "Automated CI/CD: Rendered all pipeline assets to HTML"
+            git push origin main
+          else
+            echo "No changes to deploy."
+          fi
