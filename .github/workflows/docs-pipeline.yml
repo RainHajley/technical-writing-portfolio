@@ -1,10 +1,13 @@
 name: Generate and Deploy Documentation Website
+
 on:
   push:
     branches:
       - main
+
 permissions:
   contents: write
+
 jobs:
   build-docs:
     runs-on: ubuntu-latest
@@ -12,25 +15,19 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 1. Compile AsciiDoc (Your working core preserved perfectly)
+      # 1. Compile AsciiDoc
       - name: Build HTML from AsciiDoc
         run: |
           docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor:latest asciidoctor --destination-dir=docs asciidoc-samples/sensitive-data-sop.adoc
 
-      # 2. Compile All Markdown Documents (Including your beautiful API Guide!)
+      # 2. Compile All Markdown Documents
       - name: Build HTML from Markdown
         run: |
           sudo apt-get update && sudo apt-get install -y pandoc
-          
-          # Compiles your Formatting Guide
           pandoc markdown-samples/markdown-formatting-guide.md -s -o docs/markdown-formatting-guide.html --metadata title="Markdown Formatting Guide"
-          
-          # Compiles your Grammarly Guide if it exists
           if [ -f markdown-samples/grammarly-guide.md ]; then
             pandoc markdown-samples/grammarly-guide.md -s -o docs/grammarly-guide.html --metadata title="Grammarly Integration Guide"
           fi
-          
-          # Compiles your exact llm-generation-api.md file
           if [ -f api-samples/llm-generation-api.md ]; then
             pandoc api-samples/llm-generation-api.md -s -o docs/api-reference.html --metadata title="Nexus AI Chat Completions API Reference"
           fi
@@ -42,4 +39,5 @@ jobs:
           git config --global user.email "actions@github.com"
           git add docs/
           git commit -m "Automated CI/CD: Rendered all pipeline assets to HTML" || exit 0
-          git push
+          git pull --rebase origin main
+          git push origin main
