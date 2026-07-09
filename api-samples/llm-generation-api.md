@@ -1,92 +1,68 @@
-# Chat Completions AI API Reference
+# Chat Completions API
 
-The `/v1/chat/completions` endpoint generates text completions and conversational responses based on a structured prompt payload. This API supports streaming outputs, context constraints, and advanced inference adjustments for natural language processing models.
+Use the `/v1/chat/completions` endpoint to generate text or conversational responses.
 
-## HTTP Request
+## Endpoint
 
-POST https://nexus-ai.io/v1/chat/completions
+`POST https://nexus-ai.io`
 
 ## Authentication
 
-All requests to the Nexus AI API must include your secret API key passed as a Bearer Token in the HTTP header.
+Include your secret key in the request header:
 
 ```http
 Authorization: Bearer <YOUR_NEXUS_API_KEY>
 Content-Type: application/json
 ```
 
----
-
-## Request Parameters
-
-### Request Body
+## Request Body
 
 | Parameter | Type | Required | Description |
 | :--- | :--- | :--- | :--- |
-| `model` | string | **Yes** | The explicit model identifier to process the request. Supported values: `nexus-4-omni`, `nexus-4-turbo`. |
-| `messages` | array of objects | **Yes** | A nested list of message objects representing the conversation history. See the `messages` Object schema below. |
-| `temperature` | float | Optional | Controls the randomness of the model's output generation. Values must sit between `0.0` (fully deterministic) and `2.0` (creative). Default: `1.0`. |
-| `max_tokens` | integer | Optional | The maximum token allocation permitted for the generated response window. Default: `4096`. |
+| `model` | string | **Yes** | `nexus-4-omni` or `nexus-4-turbo`. |
+| `messages` | array | **Yes** | Conversation history (see below). |
+| `temperature` | float | No | Randomness: `0.0` (deterministic) to `2.0` (creative). Default: `1.0`. |
+| `max_tokens` | integer | No | Response limit. Default: `4096`. |
 
-### messages Object Schema
+### The messages Object
 
-Each object within the `messages` array requires the following structural properties:
+Each object in the array requires:
 
-| Field Name | Type | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `role` | string | **Yes** | The author identity of this message block. Valid values: `system` (context setting), `user` (human prompt), `assistant` (previous AI output). |
-| `content` | string | **Yes** | The raw structural text payload or query string matching the designated role. |
+* **role**: `system` (context), `user` (input), or `assistant` (AI output).
+* **content**: The text payload.
 
----
-
-## Request Payload Example
-
-The following cURL command demonstrates a system-primed assistant prompt tracking software engineering code review practices.
+## Example Request
 
 ```bash
-curl --request POST \
- --url 'https://nexus-ai.io/v1/chat/completions'
-  --header 'Authorization: Bearer YOUR_NEXUS_API_KEY' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "model": "nexus-4-turbo",
-  "messages": [
-    {
-      "role": "system",
-      "content": "You are a senior refactoring engineer. Respond only with optimized code blocks."
-    },
-    {
-      "role": "user",
-      "content": "Refactor this function to remove deep nested logic loops."
-    }
-  ],
-  "temperature": 0.2,
-  "max_tokens": 512
-}'
+curl https://nexus-ai.io \
+  -H "Authorization: Bearer YOUR_NEXUS_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "nexus-4-turbo",
+    "messages": [
+      {"role": "system", "content": "You are a senior refactoring engineer."},
+      {"role": "user", "content": "Refactor this function to remove nested loops."}
+    ],
+    "temperature": 0.2,
+    "max_tokens": 512
+  }'
 ```
 
----
+## Response
 
-## Response Example (200 OK)
-
-A successful transaction returns a JSON payload containing metadata context and the generated chat completion array.
+A successful response (`200 OK`) returns a JSON object:
 
 ```json
 {
   "id": "chatcmpl_8vX29KlnM27x",
-  "object": "chat.completion",
-  "created": 1781512931,
   "model": "nexus-4-turbo",
-  "choices": [
-    {
-      "index": 0,
-      "message": {
-        "role": "assistant",
-        "content": "```python\ndef process_data(items):\n # Guard clause to eliminate nested indentation\n if not items:\n return []\n return [item.strip() for item in items if item.is_valid]\n```"
-      },
-      "finish_reason": "stop"
-    }
-  ],
+  "choices": [{
+    "message": {
+      "role": "assistant",
+      "content": "..."
+    },
+    "finish_reason": "stop"
+  }],
   "usage": {
     "prompt_tokens": 42,
     "completion_tokens": 38,
@@ -95,41 +71,10 @@ A successful transaction returns a JSON payload containing metadata context and 
 }
 ```
 
----
+## Troubleshooting
 
-## Response Field Definitions
-
-### Root Evaluation Elements
-
-| Field Name | Type | Description |
+| Status | Error | Remediation |
 | :--- | :--- | :--- |
-| `id` | string | A unique system identifier tracking this specific chat completion request. |
-| `created` | integer | A Unix epoch timestamp indicating when the text token matrix was generated. |
-| `choices` | array | A list of alternative text completions generated by the foundational model based on your parameter counts. |
-
-### choices Array Parameters
-
-| Field Name | Type | Description |
-| :--- | :--- | :--- |
-| `message` | object | The generated message object containing the role and string content. |
-| `finish_reason` | string | The token limits calculation stop marker. Common responses include `stop` (natural completion) or `length` (hit max_tokens ceiling). |
-
-### usage Metrics
-
-| Field Name | Type | Description |
-| :--- | :--- | :--- |
-| `prompt_tokens` | integer | Total calculation tokens consumed by your inbound text blocks. |
-| `completion_tokens` | integer | Total generation tokens consumed by the outbound AI text generation. |
-| `total_tokens` | integer | Aggregate transactional consumption ledger billing value (`prompt_tokens` + `completion_tokens`). |
-
----
-
-## Error Responses
-
-When a request cannot be processed, the API returns a structured error payload alongside a standard HTTP status code.
-
-| Status Code | Error Type | Description | Remediation |
-| :--- | :--- | :--- | :--- |
-| `400 Bad Request` | `invalid_payload` | Required fields are missing, or structural data types are mismatched. | Validate JSON schema formatting and verify required fields (`model`, `messages`). |
-| `401 Unauthorized` | `invalid_api_key` | The Bearer Token is missing, expired, or deactivated. | Check your account dashboard to verify credentials and ensure the token is correctly passed in the header. |
-| `429 Too Many Requests` | `rate_limit_exceeded` | The transaction rate has surpassed your current API tier ceiling. | Implement exponential backoff retry logic or upgrade your API usage plan. |
+| `400` | `invalid_payload` | Check JSON schema and required fields. |
+| `401` | `invalid_api_key` | Verify your token in the header. |
+| `429` | `rate_limit_exceeded` | Implement exponential backoff. |
