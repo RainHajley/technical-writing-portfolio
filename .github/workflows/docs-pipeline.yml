@@ -36,7 +36,9 @@ jobs:
           pandoc markdown-samples/markdown-formatting-guide.md -s -o docs/markdown-formatting-guide.html --metadata title="Markdown Formatting Guide"
           
           # Documentation standards
-          pandoc engineering_docs_standards.md -s -o docs/engineering-standards.html --metadata title="Engineering Documentation Standards"
+          if [ -f engineering_docs_standards.md ]; then
+            pandoc engineering_docs_standards.md -s -o docs/engineering-standards.html --metadata title="Engineering Documentation Standards"
+          fi
           
           # API Reference (Updated filename reference)
           if [ -f chat_completions_api.md ]; then
