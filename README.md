@@ -1,35 +1,24 @@
-# Docs-as-Code Technical Writing Portfolio
+= Technical Writing Portfolio
 
-Welcome! This repository serves as a live presentation of modern developer documentation engineering, SaaS training manuals, and enterprise API references. I treat documentation as software—utilizing structured markup languages, clean semantic patterns, and automated CI/CD validation pipelines.
+This repository demonstrates a *Docs-as-Code* methodology, focusing on automated CI/CD pipelines, structured markup architecture, and scalable documentation infrastructure.
 
----
+== Documentation Library
 
-## 📂 Portfolio Architecture & Deliverables
+=== API & Technical Reference
+* <<api-samples/llm-generation-api.adoc#, Chat Completions API>>:: Schema architecture, authentication protocols, and request/response payloads for the v1/chat/completions endpoint.
 
-This repository is organized into distinct domain folders to demonstrate versatility across varying engineering and corporate requirements:
+=== Security & Compliance
+* <<asciidoc-samples/sensitive-data-sop.adoc#, SOP: Sensitive Data Sanitization>>:: Security protocols for scrubbing PII and sensitive tokens from logs prior to system audit.
 
-* **`/api-samples`** (Markdown)
-  * **[AI Chat Completions API Reference](./api-samples/llm-generation-api.md)**: A high-level technical reference guide detailing authentication headers, request payloads, model temperature tuning parameters, and JSON token usage objects.
+=== Engineering Standards & Guides
+* <<markdown-samples/grammarly-guide.adoc#, Grammarly Integration Guide>>:: Configuration and voice-consistency standards for writing assistance tools.
+* <<markdown-samples/markdown-formatting-guide.adoc#, Documentation Standards>>:: Structural requirements and formatting conventions for the documentation library.
 
-* **`/markdown-samples`** (Markdown)
-  * **[How to Use Grammarly in Google Docs](./markdown-samples/grammarly-guide.md)**: An end-user training manual featuring interface navigation, step-by-step onboarding sequences, and visual layout troubleshooting matrixes.
-  * **[Markdown Formatting Styling Standards](./markdown-samples/markdown-formatting-guide.md)**: An internal developer guide establishing code block fencing syntax, typographical conventions, and relative linking configurations.
+== Infrastructure
+* *Pipeline:* Automated publishing via custom GitHub Actions (`.github/workflows/docs-pipeline.yml`).
+* *Deployment:* CI/CD integration with GitHub Pages for static HTML distribution.
 
-* **`/asciidoc-samples`** (AsciiDoc)
-  * **[SOP: Handling Sensitive Client Data](./asciidoc-samples/sensitive-data-sop.adoc)**: A highly structured compliance document showcasing AsciiDoc-specific document attributes, automatic cross-referencing headers, and risk-severity tables.
-
----
-
-## 🛠️ Automated CI/CD Infrastructure
-
-This workspace utilizes a decoupled publishing pipeline to render and host documents natively:
-* **The Engine:** A custom GitHub Actions automated workflow pipeline (`.github/workflows/docs-pipeline.yml`).
-* **The Output:** The pipeline compiles raw structured assets and pipes the production static distribution files directly into the `/docs` directory.
-* **The Deployment:** GitHub Pages automatically maps and broadcasts live, accessible HTML outputs directly from the `/docs` build folder.
-
----
-
-## 🧰 Core Competencies
-* **Technical Domains:** API & Webhook Specifications, IAM / Security Compliance Systems, SaaS End-User Manuals.
-* **Markup Architectures:** Markdown (GFM), AsciiDoc (Asciidoctor Ecosystem).
-* **Engineering Toolkit:** Git/GitHub Workflows, GitHub Actions Automation Pipelines, Command-Line Utilities.
+== Core Competencies
+* *Domains:* API/Webhook documentation, Security Compliance (PII/IAM), and SaaS end-user manuals.
+* *Markup:* Proficient in AsciiDoc (Asciidoctor ecosystem) and GitHub Flavored Markdown.
+* *Tooling:* Git version control, CI/CD pipeline orchestration, and command-line automation.
