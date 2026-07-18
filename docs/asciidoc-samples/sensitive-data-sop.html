@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Technical Writing Portfolio</title>
+<title>SOP: Patient Data Sanitization</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -434,86 +434,96 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 @media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
 </style>
 </head>
-<body class="article">
+<body class="article toc2 toc-right">
 <div id="header">
-<h1>Technical Writing Portfolio</h1>
+<h1>SOP: Patient Data Sanitization</h1>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_storage_protocols">Storage Protocols</a></li>
+<li><a href="#_data_sanitization_sharing">Data Sanitization &amp; Sharing</a>
+<ul class="sectlevel2">
+<li><a href="#_de_identification">De-identification</a></li>
+<li><a href="#_secure_sharing">Secure Sharing</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This repository demonstrates a <strong>Docs-as-Code</strong> methodology, focusing on automated CI/CD pipelines, structured markup architecture, and scalable documentation infrastructure.</p>
+<p>Working with Protected Health Information (PHI) requires strict adherence to security protocols. Follow these standards to maintain compliance when handling patient metrics, histories, or logs.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_documentation_library">Documentation Library</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_api_technical_reference">API &amp; Technical Reference</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="api-samples/llm-generation-api.html">Chat Completions API</a>:: Schema architecture, authentication protocols, and request/response payloads for the v1/chat/completions endpoint.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_security_compliance">Security &amp; Compliance</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="asciidoc-samples/sensitive-data-sop.html">SOP: Sensitive Data Sanitization</a>:: Security protocols for scrubbing PII and sensitive tokens from logs prior to system audit.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_engineering_standards_guides">Engineering Standards &amp; Guides</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="markdown-samples/grammarly-guide.html">Grammarly Integration Guide</a>:: Configuration and voice-consistency standards for writing assistance tools.</p>
-</li>
-<li>
-<p><a href="markdown-samples/markdown-formatting-guide.html">Documentation Standards</a>:: Structural requirements and formatting conventions for the documentation library.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_infrastructure">Infrastructure</h2>
+<h2 id="_storage_protocols">Storage Protocols</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Pipeline:</strong> Automated publishing via custom GitHub Actions (<code>.github/workflows/docs-pipeline.yml</code>).</p>
+<p><strong>Centralize Data:</strong> Store all patient-related data exclusively within hardware-encrypted company cloud directories.</p>
 </li>
 <li>
-<p><strong>Deployment:</strong> CI/CD integration with GitHub Pages for static HTML distribution.</p>
+<p><strong>Local Storage:</strong> Do not download or cache raw PHI on local machines.</p>
+</li>
+<li>
+<p><strong>Access Control:</strong> Set all new directories to <strong>Restricted</strong> upon creation. Grant access only to team members with explicit project requirements.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_core_competencies">Core Competencies</h2>
+<h2 id="_data_sanitization_sharing">Data Sanitization &amp; Sharing</h2>
 <div class="sectionbody">
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Domains:</strong> API/Webhook documentation, Security Compliance (PII/IAM), and SaaS end-user manuals.</p>
-</li>
-<li>
-<p><strong>Markup:</strong> Proficient in AsciiDoc (Asciidoctor ecosystem) and GitHub Flavored Markdown.</p>
-</li>
-<li>
-<p><strong>Tooling:</strong> Git version control, CI/CD pipeline orchestration, and command-line automation.</p>
-</li>
-</ul>
+<div class="paragraph">
+<p>Scrub all data before including logs in documentation or sharing with project teams.</p>
+</div>
+<div class="sect2">
+<h3 id="_de_identification">De-identification</h3>
+<div class="paragraph">
+<p>Use authorized scripts to mask patient names, locations, dates, and account numbers.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_secure_sharing">Secure Sharing</h3>
+<div class="paragraph">
+<p>Enforce the following for all shared sensitive documentation:
+* <strong>Password Protection:</strong> Mandatory on all shared assets.
+* <strong>Link Expiration:</strong> Set to a maximum of 7 days.
+* <strong>Communication:</strong> Never share access tokens or links to raw data in public or cross-departmental channels.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Monthly Audits:</strong> The security team performs randomized, automated audits on all repositories. Improper permissions or public links will trigger an immediate flag.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Compliance Risk:</strong> Non-compliance results in an immediate security review and potential suspension of system access.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
 </div>
 </div>
 </div>

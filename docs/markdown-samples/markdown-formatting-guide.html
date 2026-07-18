@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Technical Writing Portfolio</title>
+<title>Engineering Documentation Standards</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,82 +436,70 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>Technical Writing Portfolio</h1>
+<h1>Engineering Documentation Standards</h1>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>This repository demonstrates a <strong>Docs-as-Code</strong> methodology, focusing on automated CI/CD pipelines, structured markup architecture, and scalable documentation infrastructure.</p>
+<p>This guide defines formatting and metadata requirements for all developer-facing documentation.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_documentation_library">Documentation Library</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_api_technical_reference">API &amp; Technical Reference</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="api-samples/llm-generation-api.html">Chat Completions API</a>:: Schema architecture, authentication protocols, and request/response payloads for the v1/chat/completions endpoint.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_security_compliance">Security &amp; Compliance</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="asciidoc-samples/sensitive-data-sop.html">SOP: Sensitive Data Sanitization</a>:: Security protocols for scrubbing PII and sensitive tokens from logs prior to system audit.</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_engineering_standards_guides">Engineering Standards &amp; Guides</h3>
-<div class="ulist">
-<ul>
-<li>
-<p><a href="markdown-samples/grammarly-guide.html">Grammarly Integration Guide</a>:: Configuration and voice-consistency standards for writing assistance tools.</p>
-</li>
-<li>
-<p><a href="markdown-samples/markdown-formatting-guide.html">Documentation Standards</a>:: Structural requirements and formatting conventions for the documentation library.</p>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_infrastructure">Infrastructure</h2>
+<h2 id="_typography_and_highlights">Typography and Highlights</h2>
 <div class="sectionbody">
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Pipeline:</strong> Automated publishing via custom GitHub Actions (<code>.github/workflows/docs-pipeline.yml</code>).</p>
+<p><strong>UI Components:</strong> Use bold for buttons, menus, and interface elements (e.g., <strong>Submit</strong>).</p>
 </li>
 <li>
-<p><strong>Deployment:</strong> CI/CD integration with GitHub Pages for static HTML distribution.</p>
+<p><code>Paths &amp; Variables:</code> Use backticks for file paths, folder structures, and environmental variables (e.g., <code>src/config.json</code>).</p>
+</li>
+<li>
+<p><em>Emphasis:</em> Use italics for key terms or conceptual labels.</p>
 </li>
 </ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_core_competencies">Core Competencies</h2>
+<h2 id="_code_block_standards">Code Block Standards</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>Always specify the language in the opening fence to ensure correct syntax highlighting.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">def calculate_uptime(total, downtime):
+    """Computes operational availability percentage."""
+    if total == 0:
+        return 0.0
+    return ((total - downtime) / total) * 100</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_review_checklist">Review Checklist</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Before merging documentation updates, verify the following:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
-<p><strong>Domains:</strong> API/Webhook documentation, Security Compliance (PII/IAM), and SaaS end-user manuals.</p>
+<p><strong>Links:</strong> Use relative paths for all internal links (no absolute URLs).</p>
 </li>
 <li>
-<p><strong>Markup:</strong> Proficient in AsciiDoc (Asciidoctor ecosystem) and GitHub Flavored Markdown.</p>
+<p><strong>Tables:</strong> Verify all tables contain explicit, properly formatted header rows.</p>
 </li>
 <li>
-<p><strong>Tooling:</strong> Git version control, CI/CD pipeline orchestration, and command-line automation.</p>
+<p><strong>Media:</strong> Use compressed formats (<code>.webp</code> or <code>.png</code>) for all image assets.</p>
+</li>
+<li>
+<p><strong>Clarity:</strong> Keep content direct; avoid filler words and unnecessary process background.</p>
 </li>
 </ul>
 </div>
