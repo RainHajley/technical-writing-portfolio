@@ -23,39 +23,27 @@ jobs:
           git fetch origin main
           git reset --hard origin/main
 
-      # 1. Compile AsciiDoc
+      # 1. Compile ALL AsciiDoc files automatically
       - name: Build HTML from AsciiDoc
         run: |
-          docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor:latest asciidoctor --destination-dir=docs asciidoc-samples/sensitive-data-sop.adoc
+          mkdir -p docs
+          docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor:latest /bin/bash -c "find . -name '*.adoc' -not -path './docs/*' -exec asciidoctor -D docs {} \;"
 
-      # 2. Compile All Markdown Documents
+      # 2. Compile ALL Markdown files automatically
       - name: Build HTML from Markdown
         run: |
           sudo apt-get update && sudo apt-get install -y pandoc
-          # Standard guides
-          pandoc markdown-samples/markdown-formatting-guide.md -s -o docs/markdown-formatting-guide.html --metadata title="Markdown Formatting Guide"
-          
-          # Documentation standards
-          if [ -f engineering_docs_standards.md ]; then
-            pandoc engineering_docs_standards.md -s -o docs/engineering-standards.html --metadata title="Engineering Documentation Standards"
-          fi
-          
-          # API Reference (Updated filename reference)
-          if [ -f chat_completions_api.md ]; then
-            pandoc chat_completions_api.md -s -o docs/api-reference.html --metadata title="Nexus AI Chat Completions API Reference"
-          fi
-          
-          # SOP Reference
-          if [ -f sop_patient_data.md ]; then
-            pandoc sop_patient_data.md -s -o docs/sop-patient-data.html --metadata title="SOP: Patient Data Sanitization"
-          fi
+          mkdir -p docs
+          for file in $(find . -name '*.md' -not -path './docs/*'); do
+            pandoc "$file" -s -o "docs/$(basename "${file%.md}.html")"
+          done
 
       # 3. Deploy
       - name: Deploy to GitHub Pages Folder
         run: |
           git add docs/
           if ! git diff --cached --quiet; then
-            git commit -m "Automated CI/CD: Rendered all pipeline assets to HTML"
+            git commit -m "Automated CI/CD: Pipeline rendered all .adoc and .md assets"
             git push origin main
           else
             echo "No changes to deploy."
