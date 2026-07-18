@@ -27,7 +27,12 @@ jobs:
       - name: Build HTML from AsciiDoc
         run: |
           mkdir -p docs
-          docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor:latest /bin/bash -c "find . -name '*.adoc' -not -path './docs/*' -exec asciidoctor -D docs {} \;"
+          # Compile README.adoc specifically to index.html
+          if [ -f README.adoc ]; then
+            docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor:latest asciidoctor -o docs/index.html README.adoc
+          fi
+          # Compile all OTHER .adoc files normally
+          docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor:latest bash -c "find . -name '*.adoc' -not -name 'README.adoc' -not -path './docs/*' -exec asciidoctor -D docs {} \;"
 
       # 2. Compile ALL Markdown files automatically
       - name: Build HTML from Markdown
