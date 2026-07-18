@@ -23,24 +23,34 @@ jobs:
           git fetch origin main
           git reset --hard origin/main
 
-      # 1. Compile ALL AsciiDoc files automatically
+      # 1. Build HTML from AsciiDoc (Preserving Structure)
       - name: Build HTML from AsciiDoc
         run: |
           mkdir -p docs
-          # Compile README.adoc specifically to index.html
+          # Compile README.adoc to index.html in the root of docs/
           if [ -f README.adoc ]; then
             docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor:latest asciidoctor -o docs/index.html README.adoc
           fi
-          # Compile all OTHER .adoc files normally
-          docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor:latest bash -c "find . -name '*.adoc' -not -name 'README.adoc' -not -path './docs/*' -exec asciidoctor -D docs {} \;"
+          # Compile other .adoc files while maintaining their folder paths
+          find . -name "*.adoc" -not -name "README.adoc" -not -path "./docs/*" -not -path "./.git/*" | while read file; do
+            # Remove leading './' from path
+            clean_path=${file#./}
+            # Create the corresponding directory in docs/
+            target_dir="docs/$(dirname "$clean_path")"
+            mkdir -p "$target_dir"
+            # Build the file to that directory
+            docker run --rm -v ${{ github.workspace }}:/documents asciidoctor/docker-asciidoctor:latest asciidoctor -D "$target_dir" "$file"
+          done
 
-      # 2. Compile ALL Markdown files automatically
+      # 2. Build HTML from Markdown (Preserving Structure)
       - name: Build HTML from Markdown
         run: |
           sudo apt-get update && sudo apt-get install -y pandoc
-          mkdir -p docs
-          for file in $(find . -name '*.md' -not -path './docs/*'); do
-            pandoc "$file" -s -o "docs/$(basename "${file%.md}.html")"
+          find . -name "*.md" -not -path "./docs/*" -not -path "./.git/*" | while read file; do
+            clean_path=${file#./}
+            target_dir="docs/$(dirname "$clean_path")"
+            mkdir -p "$target_dir"
+            pandoc "$file" -s -o "$target_dir/$(basename "${file%.md}.html")"
           done
 
       # 3. Deploy
