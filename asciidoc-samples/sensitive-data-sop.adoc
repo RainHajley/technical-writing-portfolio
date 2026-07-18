@@ -2,37 +2,35 @@
 :id: SOP-HIT-094
 :status: Internal
 :compliance: HIPAA
+:toc: right
 
-Working with Protected Health Information (PHI) requires strict adherence to security protocols. If you handle patient metrics, histories, or logs, follow these standards to maintain compliance.
+Working with Protected Health Information (PHI) requires strict adherence to security protocols. Follow these standards to maintain compliance when handling patient metrics, histories, or logs.
 
-== Storage Rules
+== Storage Protocols
 
-*Centralize data*:: Store all patient-related data exclusively within our company-managed, hardware-encrypted cloud directories.
-*No local files*:: Do not download or cache raw PHI on your local machine.
-*Restrict access*:: When creating a new directory, set it to **Restricted** immediately. Only grant access to team members who require it for their specific tasks.
+* *Centralize Data:* Store all patient-related data exclusively within hardware-encrypted company cloud directories.
+* *Local Storage:* Do not download or cache raw PHI on local machines.
+* *Access Control:* Set all new directories to *Restricted* upon creation. Grant access only to team members with explicit project requirements.
 
 == Data Sanitization & Sharing
 
-Before including logs in documentation or sharing them with the team, you must scrub the data.
+Scrub all data before including logs in documentation or sharing with project teams.
 
-=== De-identify
-Run our authorized scripts on all logs to mask patient names, locations, dates, and account numbers.
+=== De-identification
+Use authorized scripts to mask patient names, locations, dates, and account numbers.
 
-=== Secure links
-If you share a link to sensitive documentation, you must enforce the following:
-
-* Enable **Password Protection**.
-* Set the **Link Expiration** to **7 days**.
-
-=== Keep it private
-Never share access tokens or links to raw data in public or cross-departmental chat channels.
+=== Secure Sharing
+Enforce the following for all shared sensitive documentation:
+* *Password Protection:* Mandatory on all shared assets.
+* *Link Expiration:* Set to a maximum of 7 days.
+* *Communication:* Never share access tokens or links to raw data in public or cross-departmental channels.
 
 [NOTE]
 ====
-*Monthly Audits:* Our security team performs randomized, automated audits on all repositories. Improper permissions or public links will trigger an immediate flag.
+*Monthly Audits:* The security team performs randomized, automated audits on all repositories. Improper permissions or public links will trigger an immediate flag.
 ====
 
 [WARNING]
 ====
-*Compliance Risk:* Handling patient data is high-stakes. Non-compliance results in an immediate security review and suspension of your system access.
+*Compliance Risk:* Non-compliance results in an immediate security review and potential suspension of system access.
 ====
