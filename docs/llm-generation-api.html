@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.26">
-<title>Using Grammarly in Google Docs</title>
+<title>Chat Completions API</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,74 +436,146 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>Using Grammarly in Google Docs</h1>
+<h1>Chat Completions API</h1>
 </div>
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Get real-time writing suggestions in Google Docs by installing the Grammarly browser extension.</p>
+<p>Use the <code>/v1/chat/completions</code> endpoint to generate text or conversational responses.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_1_installation">1. Installation</h2>
+<h2 id="_endpoint">Endpoint</h2>
 <div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Navigate to your browser’s extension store (Chrome, Firefox, or Edge).</p>
-</li>
-<li>
-<p>Search for <code>Grammarly</code>.</p>
-</li>
-<li>
-<p>Select <strong>Add to [Browser Name]</strong> and confirm the installation.</p>
-</li>
-</ol>
+<div class="paragraph">
+<p><code>POST <a href="https://nexus-ai.io/v1/chat/completions" class="bare">https://nexus-ai.io/v1/chat/completions</a></code></p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_2_configuration">2. Configuration</h2>
+<h2 id="_authentication">Authentication</h2>
 <div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Select the <strong>Extensions</strong> icon (the puzzle piece) in your browser toolbar.</p>
-</li>
-<li>
-<p>Choose <strong>Grammarly</strong>.</p>
-</li>
-<li>
-<p>Select <strong>Log In</strong> to link your account.</p>
-</li>
-</ol>
+<div class="paragraph">
+<p>Include your secret key in the request header:</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_3_activation_in_google_docs">3. Activation in Google Docs</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Open any file in Google Docs.</p>
-</li>
-<li>
-<p>Locate the floating Grammarly status icon in the bottom-right corner.</p>
-</li>
-<li>
-<p>Click the icon to open the sidebar.</p>
-</li>
-<li>
-<p>Toggle <strong>Check for suggestions on this domain</strong> to <strong>ON</strong>.</p>
-</li>
-</ol>
-</div>
-<div class="imageblock">
+<div class="listingblock">
 <div class="content">
-<img src="path/to/your/screenshot.png" alt="Grammarly sidebar toggle in Google Docs">
+<pre class="highlight"><code class="language-http" data-lang="http">Authorization: Bearer &lt;YOUR_NEXUS_API_KEY&gt;
+Content-Type: application/json</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_request_body">Request Body</h2>
+<div class="sectionbody">
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Parameter</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Required</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>model</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>nexus-4-omni</code> or <code>nexus-4-turbo</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>messages</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">array</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Conversation history (see below).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>temperature</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Randomness: <code>0.0</code> (deterministic) to <code>2.0</code> (creative). Default: <code>1.0</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>max_tokens</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Response limit. Default: <code>4096</code>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="sect2">
+<h3 id="_message_object_structure">Message Object structure</h3>
+<div class="paragraph">
+<p>Each object in the array requires:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>role</strong>: <code>system</code> (context), <code>user</code> (input), or <code>assistant</code> (AI output).</p>
+</li>
+<li>
+<p><strong>content</strong>: The text payload.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_example_request">Example Request</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">curl https://nexus-ai.io/v1/chat/completions \
+  -H "Authorization: Bearer YOUR_NEXUS_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "nexus-4-turbo",
+    "messages": [
+      {"role": "system", "content": "You are a senior refactoring engineer."},
+      {"role": "user", "content": "Refactor this function to remove nested loops."}
+    ],
+    "temperature": 0.2,
+    "max_tokens": 512
+  }'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_response">Response</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A successful response (<code>200 OK</code>) returns:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-json" data-lang="json">{
+  "id": "chatcmpl_8vX29KlnM27x",
+  "model": "nexus-4-turbo",
+  "choices": [{
+    "message": {
+      "role": "assistant",
+      "content": "..."
+    },
+    "finish_reason": "stop"
+  }],
+  "usage": {
+    "prompt_tokens": 42,
+    "completion_tokens": 38,
+    "total_tokens": 80
+  }
+}</code></pre>
 </div>
 </div>
 </div>
@@ -513,23 +585,32 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sectionbody">
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Symptom</th>
-<th class="tableblock halign-left valign-top">Fix</th>
+<th class="tableblock halign-left valign-top">Status</th>
+<th class="tableblock halign-left valign-top">Error</th>
+<th class="tableblock halign-left valign-top">Remediation</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Icon missing</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Select the <strong>Extensions</strong> icon, verify <strong>Grammarly</strong> is toggled <strong>ON</strong>, and refresh the page.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>400</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>invalid_payload</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Check JSON schema and required fields.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Freezing/Lag</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A conflicting extension (typically an ad-blocker) is interfering. Disable other extensions individually or test in an <strong>Incognito</strong> window.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>401</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>invalid_api_key</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Verify your token in the header.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>429</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>rate_limit_exceeded</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Implement exponential backoff.</p></td>
 </tr>
 </tbody>
 </table>
