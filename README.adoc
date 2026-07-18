@@ -5,14 +5,14 @@ This repository demonstrates a *Docs-as-Code* methodology, focusing on automated
 == Documentation Library
 
 === API & Technical Reference
-* <<api-samples/llm-generation-api.adoc#, Chat Completions API>>:: Schema architecture, authentication protocols, and request/response payloads for the v1/chat/completions endpoint.
+* link:api-samples/llm-generation-api.html[Chat Completions API]:: Schema architecture, authentication protocols, and request/response payloads for the v1/chat/completions endpoint.
 
 === Security & Compliance
-* <<asciidoc-samples/sensitive-data-sop.adoc#, SOP: Sensitive Data Sanitization>>:: Security protocols for scrubbing PII and sensitive tokens from logs prior to system audit.
+* link:asciidoc-samples/sensitive-data-sop.html[SOP: Sensitive Data Sanitization]:: Security protocols for scrubbing PII and sensitive tokens from logs prior to system audit.
 
 === Engineering Standards & Guides
-* <<markdown-samples/grammarly-guide.adoc#, Grammarly Integration Guide>>:: Configuration and voice-consistency standards for writing assistance tools.
-* <<markdown-samples/markdown-formatting-guide.adoc#, Documentation Standards>>:: Structural requirements and formatting conventions for the documentation library.
+* link:markdown-samples/grammarly-guide.html[Grammarly Integration Guide]:: Configuration and voice-consistency standards for writing assistance tools.
+* link:markdown-samples/markdown-formatting-guide.html[Documentation Standards]:: Structural requirements and formatting conventions for the documentation library.
 
 == Infrastructure
 * *Pipeline:* Automated publishing via custom GitHub Actions (`.github/workflows/docs-pipeline.yml`).
