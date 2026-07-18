@@ -1,0 +1,33 @@
+= Using Grammarly in Google Docs
+
+Get real-time writing suggestions in Google Docs by installing the Grammarly browser extension.
+
+== 1. Installation
+
+. Navigate to your browser’s extension store (Chrome, Firefox, or Edge).
+. Search for `Grammarly`.
+. Select *Add to [Browser Name]* and confirm the installation.
+
+== 2. Configuration
+
+. Select the *Extensions* icon (the puzzle piece) in your browser toolbar.
+. Choose *Grammarly*.
+. Select *Log In* to link your account.
+
+== 3. Activation in Google Docs
+
+. Open any file in Google Docs.
+. Locate the floating Grammarly status icon in the bottom-right corner.
+. Click the icon to open the sidebar.
+. Toggle *Check for suggestions on this domain* to *ON*.
+
+image::path/to/your/screenshot.png[Grammarly sidebar toggle in Google Docs]
+
+== Troubleshooting
+
+|===
+|Symptom |Fix
+
+|Icon missing |Select the *Extensions* icon, verify *Grammarly* is toggled *ON*, and refresh the page.
+|Freezing/Lag |A conflicting extension (typically an ad-blocker) is interfering. Disable other extensions individually or test in an *Incognito* window.
+|===
